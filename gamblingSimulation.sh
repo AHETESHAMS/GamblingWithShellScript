@@ -2,21 +2,21 @@
 cash=100
 bet=20
 goal=200
-i=0
-while [[ $cash -gt 20 && $i -lt 10 ]]
+days=0
+win=0
+loose=0
+while [[ $cash -gt 20 && $days -lt 20 ]]
 do
 randomCheck=$(( RANDOM%2 ))
 if [[ $randomCheck -eq 1 ]]
 then
 	cash=$(( cash+bet*2 ))
+	(( win++ ))
 else
 	cash=$(( cash-bet*2 ))
+	(( loose++ ))
 fi
-(( i++ ))
+(( days++ ))
 done
-if [[ $cash -ge $goal ]]
-then
-	echo "Player Won..."
-else
-	echo "Player Loose..."
-fi
+echo $win "Times Won"
+echo $loose "Times Loose"
