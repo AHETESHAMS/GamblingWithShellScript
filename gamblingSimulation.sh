@@ -14,21 +14,20 @@ do
 		randomCheck=$(( RANDOM%2 ))
 		if [[ $randomCheck -eq 1 ]]
 		then
-			echo "Player Won"
 			cash=$(( cash+bet*2 ))
 			(( win++ ))
 		else
-			echo "Player Loose"
 			cash=$(( cash-bet*2 ))
 			(( loose++ ))
 		fi
-		echo "Cash"$cash
 	done
 	if [[ $win -gt $loose ]]
 	then
 		(( winnigDays++ ))
+		echo "Day "$days" Is My Luckiest Day"
 	else
 		(( loosingDays++ ))
+		echo "Day "$days" Is My Unluckiest Day"
 	fi
 	(( days++ ))
 done
