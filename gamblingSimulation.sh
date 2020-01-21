@@ -1,22 +1,38 @@
-#!/bin/bash -x
-cash=100
-bet=20
-goal=200
+#!/bin/bash 
 days=0
-win=0
-loose=0
-while [[ $cash -gt 20 && $days -lt 20 ]]
+bet=20
+winnigDays=0
+loosingDays=0
+while [[ $days -lt 20 ]]
 do
-randomCheck=$(( RANDOM%2 ))
-if [[ $randomCheck -eq 1 ]]
-then
-	cash=$(( cash+bet*2 ))
-	(( win++ ))
-else
-	cash=$(( cash-bet*2 ))
-	(( loose++ ))
-fi
-(( days++ ))
+	cash=100
+	goal=250
+	win=0
+	loose=0
+	while  [[ $cash -gt 20 && $cash -lt $goal ]]
+	do
+		randomCheck=$(( RANDOM%2 ))
+		if [[ $randomCheck -eq 1 ]]
+		then
+			echo "Player Won"
+			cash=$(( cash+bet*2 ))
+			(( win++ ))
+		else
+			echo "Player Loose"
+			cash=$(( cash-bet*2 ))
+			(( loose++ ))
+		fi
+		echo "Cash"$cash
+	done
+	if [[ $win -gt $loose ]]
+	then
+		(( winnigDays++ ))
+	else
+		(( loosingDays++ ))
+	fi
+	(( days++ ))
 done
-echo $win "Times Won"
-echo $loose "Times Loose"
+echo "Winnig days "$winnigDays
+echo "Loosing Days "$loosingDays
+echo $days
+
